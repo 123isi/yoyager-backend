@@ -19,18 +19,11 @@ public class SignUpService {
     if (userRepository.existsByEmail(request.getEmail())) {
       throw new RuntimeException("이미 가입된 이메일입니다.");
     }
-
     UserEntity user = UserEntity.builder()
-            .email(request.getEmail())
-            .password(passwordEncoder.encode(request.getPassword()))
-            .name(request.getName())
-            .birthdate(request.getBirthdate())
-            .travel_style(request.getTravel_style())
-            .profile_image(request.getProfile_image())
+            .request(request)
+            .passwordEncoder(passwordEncoder)
             .build();
-
     userRepository.save(user);
-
     return RegisterResponse.from(user);
   }
 }

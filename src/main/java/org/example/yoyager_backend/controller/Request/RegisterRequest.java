@@ -10,5 +10,4 @@ public class RegisterRequest {
   String birthdate;
   String travel_style;
   String profile_image;
-
 }

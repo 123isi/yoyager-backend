@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.example.yoyager_backend.controller.Request.RegisterRequest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Entity
 @Table(name = "users")
@@ -30,12 +32,13 @@ public class UserEntity {
 
 
   @Builder
-  public UserEntity(String email, String password, String name, String birthdate, String travel_style, String profile_image) {
-    this.email = email;
-    this.password = password;
-    this.name = name;
-    this.birthdate = birthdate;
-    this.travel_style = travel_style;
-    this.profile_image = profile_image;
+  public UserEntity(RegisterRequest request, PasswordEncoder passwordEncoder) {
+    this.email = request.getEmail();
+    this.password = passwordEncoder.encode(request.getPassword());
+    this.name = request.getName();
+    this.birthdate = request.getBirthdate();
+    this.travel_style = request.getTravel_style();
+    this.profile_image = request.getProfile_image();
   }
+
 }
