@@ -8,4 +8,5 @@ public class UserDto {
   String birthdate;
   String travel_style;
   String profile_image;
+  String plan_type;
 }

@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.example.yoyager_backend.controller.Request.RegisterRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+
+
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
@@ -30,6 +32,7 @@ public class UserEntity {
   @Column(columnDefinition = "TEXT")
   private String profile_image;
 
+  private String plan_type;
 
   @Builder
   public UserEntity(RegisterRequest request, PasswordEncoder passwordEncoder) {
@@ -39,6 +42,6 @@ public class UserEntity {
     this.birthdate = request.getBirthdate();
     this.travel_style = request.getTravel_style();
     this.profile_image = request.getProfile_image();
+    this.plan_type = "nonpaid";
   }
-
 }

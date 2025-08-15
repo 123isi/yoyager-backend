@@ -6,6 +6,7 @@ import org.example.yoyager_backend.controller.Request.RegisterRequest;
 import org.example.yoyager_backend.controller.Response.LoginResponse;
 import org.example.yoyager_backend.controller.Response.RegisterResponse;
 import org.example.yoyager_backend.service.LoginService;
+import org.example.yoyager_backend.service.RefreshService;
 import org.example.yoyager_backend.service.SignUpService;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,12 +17,13 @@ public class AuthController {
 
   private final SignUpService signUpService;
   private final LoginService loginService;
+  private final RefreshService refreshService;
   @PostMapping("/signup")
   public RegisterResponse signUp(@RequestBody RegisterRequest request) {
     return signUpService.signUp(request);
   }
   @PostMapping("/login")
-  public LoginResponse login(@RequestBody LoginRequest request) {
-    return loginService.login(request);
-  }
+  public LoginResponse login(@RequestBody LoginRequest request) {return loginService.login(request);}
+  @GetMapping("/refresh")
+  public String refresh(@RequestHeader("refresh_token") String refreshToken) {return refreshService.refresh(refreshToken);}
 }
