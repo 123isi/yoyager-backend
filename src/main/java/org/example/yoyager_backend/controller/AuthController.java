@@ -22,16 +22,11 @@ public class AuthController {
   private final RefreshService refreshService;
   private final LogoutService logoutService;
   @PostMapping("/signup")
-  public RegisterResponse signUp(@RequestBody RegisterRequest request) {
-    return signUpService.signUp(request);
-  }
+  public RegisterResponse signUp(@RequestBody RegisterRequest request) {return signUpService.signUp(request);}
   @PostMapping("/login")
   public LoginResponse login(@RequestBody LoginRequest request) {return loginService.login(request);}
   @GetMapping("/refresh")
   public String refresh(@RequestHeader("refresh_token") String refreshToken) {return refreshService.refresh(refreshToken);}
   @DeleteMapping("/logout")
-  public ResponseEntity<String> logout(@RequestHeader("access_token") String accessToken) {
-    logoutService.logout(accessToken);
-    return ResponseEntity.ok("삭제되었습니다");
-  }
+  public ResponseEntity<String> logout(@RequestHeader("access_token") String accessToken) {logoutService.logout(accessToken);return ResponseEntity.ok("삭제되었습니다");}
 }
